@@ -1,3 +1,4 @@
+require('dotenv').config();
 const client = require('../database');
 
 const usersController = {};
@@ -6,7 +7,7 @@ usersController.getAllUsers = async (req, res, next) => {
   try {
     await client.connect();
 
-    const database = client.db('vetware-cluster');
+    const database = client.db(process.env.DB_NAME);
     const users = database.collection('users');
 
     const allUsers = await users.find().toArray();
@@ -25,7 +26,7 @@ usersController.getUser = async (req, res, next) => {
   try {
     await client.connect();
 
-    const database = client.db('vetware-cluster');
+    const database = client.db(process.env.DB_NAME);
     const users = database.collection('users');
 
     const query = { email };
@@ -47,7 +48,7 @@ usersController.newUser = async (req, res, next) => {
   try {
     await client.connect();
 
-    const database = client.db('vetware-cluster');
+    const database = client.db(process.env.DB_NAME);
     const users = database.collection('users');
 
     // create a document to insert
@@ -55,6 +56,7 @@ usersController.newUser = async (req, res, next) => {
       name,
       email,
       password,
+      pets: []
     };
 
     const result = await users.insertOne(user);
