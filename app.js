@@ -13,5 +13,6 @@ app.use(express.json());
 app.use('/', require('./routes/users'));
 app.use('/', require('./routes/pets'));
 app.use('/', require('./routes/services'));
+app.use('/', require('./routes/appointments'));
 
 module.exports = app;
