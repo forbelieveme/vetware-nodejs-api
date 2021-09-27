@@ -22,15 +22,15 @@ petsController.newPet = async (req, res) => {
             history: []
         };
 
-        const result = await pets.insertOne(pet);
+        const result_1 = await pets.insertOne(pet);
 
         const query = { email: owner_email }
         const updateOwner = {
-            $push: { pets: result.insertedId }
+            $push: { pets: result_1.insertedId }
         }
 
-        const resultUpdate = await users.updateOne(query, updateOwner);
-        res.json({ message: `A document was inserted with the _id: ${result.insertedId}` });
+        const result_2 = await users.updateOne(query, updateOwner);
+        res.json({ message: `A document was inserted with the _id: ${result_1.insertedId}` });
     } catch (err) {
         console.log(err.stack);
     } finally {
