@@ -18,7 +18,8 @@ petsController.newPet = async (req, res) => {
             name,
             // date_birth,
             species,
-            breed
+            breed,
+            history: []
         };
 
         const result = await pets.insertOne(pet);
