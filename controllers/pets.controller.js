@@ -3,8 +3,28 @@ const client = require("../database");
 
 const petsController = {};
 
+petsController.getUserPets = async (req, res) => {
+  const { owner_id } = req.body;
+  try {
+    await client.connect();
+
+    const database = client.db(process.env.DB_NAME);
+    const pets = database.collection("pets");
+
+    const query = { owner_id };
+
+    const result = await pets.find(query).project({ owner_id: 0 }).toArray();
+
+    res.json(result);
+  } catch (err) {
+    console.log(err.stack);
+    res.json(err.stack);
+  } finally {
+    await client.close();
+  }
+};
+
 petsController.newPet = async (req, res) => {
-  // const { owner_email, name, date_birth, species, breed } = req.body;
   const { owner_id, date_birth, name, species, breed } = req.body;
   try {
     await client.connect();
