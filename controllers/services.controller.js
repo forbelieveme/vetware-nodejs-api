@@ -36,7 +36,7 @@ servicesController.newService = async (req, res) => {
 
         const result = await services.insertOne(service);
 
-        res.json({ message: `A document was inserted with the _id: ${result.insertedId}` });
+        res.json({ message: `A new service was created with the _id: ${result.insertedId}` });
     } catch (err) {
         console.log(err.stack);
     } finally {

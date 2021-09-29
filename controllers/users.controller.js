@@ -22,7 +22,6 @@ usersController.getAllUsers = async (req, res, next) => {
 
 usersController.getUser = async (req, res, next) => {
   const { email } = req.body;
-  console.log(email);
   try {
     await client.connect();
 
@@ -32,8 +31,6 @@ usersController.getUser = async (req, res, next) => {
     const query = { email };
 
     const user = await users.findOne(query);
-
-    console.log(user);
 
     res.json(user);
   } catch (err) {
