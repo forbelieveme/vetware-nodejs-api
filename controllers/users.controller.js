@@ -55,13 +55,12 @@ usersController.newUser = async (req, res, next) => {
     const user = {
       name,
       email,
-      password,
-      pets: []
+      password
     };
 
     const result = await users.insertOne(user);
 
-    res.json({ message: `A document was inserted with the _id: ${result.insertedId}` });
+    res.json({ message: `A new user has been created with _id: ${result.insertedId}` });
   } catch (err) {
     console.log(err.stack);
   } finally {
