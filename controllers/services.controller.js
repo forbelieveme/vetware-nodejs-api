@@ -21,7 +21,7 @@ servicesController.getServices = async (req, res) => {
 }
 
 servicesController.newService = async (req, res) => {
-    const { name, duration } = req.body;
+    const { name, duration, image_url } = req.body;
     try {
         await client.connect();
 
@@ -31,7 +31,8 @@ servicesController.newService = async (req, res) => {
         // create a document to insert
         const service = {
             name,
-            duration
+            duration,
+            image_url
         };
 
         const result = await services.insertOne(service);
